@@ -1,0 +1,69 @@
+$--border: 1px solid lightgray;
+
+.post {
+  max-width: 500px;
+  background-color: #fff;
+  border: $--border;
+  margin: 0 auto;
+  margin-bottom: 45px;
+
+  &__header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 16px;
+  }
+
+  &__avatar {
+    margin-right: 18px;
+  }
+
+  &__image {
+    width: 100%;
+    object-fit: contain;
+    border-top: $--border;
+    border-bottom: $--border;
+  }
+
+  &__caption {
+    font-weight: normal;
+    padding: 16px;
+  }
+
+  &__delete {
+    cursor: pointer;
+  }
+
+  &__form {
+    border-top: 1px solid lightgray;
+    display: flex;
+  }
+
+  &__commentInput {
+    flex: 1;
+    outline: none;
+    border: none;
+    padding: 15px;
+  }
+
+  &__comments {
+    padding: 16px;
+    margin-bottom: 10px;
+  }
+
+  &__commentButton {
+    padding: 0 25px;
+    align-self: stretch;
+    outline: none;
+    border: none;
+    border-left: 1px solid lightgray;
+    color: #4088cf;
+    font-size: 15px;
+    cursor: pointer;
+
+    &:disabled {
+      color: gray;
+      cursor: unset;
+    }
+  }
+}

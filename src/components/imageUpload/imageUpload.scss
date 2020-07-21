@@ -1,0 +1,37 @@
+.imageupload {
+  display: flex;
+  flex-direction: column;
+  max-width: 100%;
+  width: 900px;
+  border: 1px solid lightgray;
+  margin: 30px auto;
+  padding: 10px;
+
+  & > * {
+    margin-bottom: 10px;  
+  }
+
+  &__input {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding-bottom: 10px;
+    border-bottom: 1px solid lightgray;
+  }
+
+  &__progress {
+    &::-webkit-progress-bar {
+      background-color: #eee;
+      border-radius: 2px;
+      box-shadow: 0 2px 5px rgba(0, 0, 0, 0.25) inset;
+    }
+
+    -webkit-appearance: none;
+    appearance: none;
+
+    width: 100%;
+    height: 20px;
+  }
+//   position: fixed;
+//   bottom: 0;
+}
