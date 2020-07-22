@@ -18,11 +18,8 @@ const ImageUpload = ({ username, email }) => {
   }
 
   const handleUpload = () => {
-    const uploadTask = storage.ref(`videos/${image.name}`).put(image);
+    const uploadTask = storage.ref(`images/${image.name}`).put(image);
 
-    setCaption('')
-    setImage(null)
-    setProgress(0)
     uploadTask.on(
       'state_changed',
       (snapshot) => {
@@ -54,6 +51,10 @@ const ImageUpload = ({ username, email }) => {
         })
       }
     )
+
+    setCaption('')
+    setImage(null)
+    setProgress(0)
   }
 
   const handleCaption = e => setCaption(e.target.value)

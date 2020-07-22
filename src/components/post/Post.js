@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react'
-import { db, storage } from '../../firebase'
+import { db } from '../../firebase'
 import firebase from 'firebase'
 import './post.scss' 
 import FlipMove from 'react-flip-move';
