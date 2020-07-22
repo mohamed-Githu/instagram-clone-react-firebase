@@ -1,5 +1,9 @@
 html {
   box-sizing: border-box;
+
+  @media only screen and (max-width: 34.375em) {
+    font-size: 62.5%;
+  }
 }
 
 body {

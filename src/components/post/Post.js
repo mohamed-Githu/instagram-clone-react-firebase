@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react'
-import { db } from '../../firebase'
+import { db, storage } from '../../firebase'
 import firebase from 'firebase'
-import './post.scss'
+import './post.scss' 
 import FlipMove from 'react-flip-move';
 
 import Avatar from '@material-ui/core/Avatar'
@@ -50,6 +50,7 @@ const Post = ({ username, imgUrl, caption, email, id, user }) => {
     db.collection('posts').doc(id).delete();
   }
   
+  console.log(imgUrl)
   return (
     <div className='post'>
 

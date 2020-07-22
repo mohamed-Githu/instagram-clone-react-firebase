@@ -28,13 +28,13 @@ function Posts({ user }) {
           imgUrl={imgUrl} 
           username={username} 
           caption={caption}
-          email={email}
+          email={email} 
           id={id}
           user={user}
           myEmail={user?.email}
           commenterName={user?.displayName}
         />)
-      }       
+      }
     </div>
   )
 }

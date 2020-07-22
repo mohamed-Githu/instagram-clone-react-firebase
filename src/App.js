@@ -43,7 +43,7 @@ const App = () => {
           ) }
         </div>
       </Header>
-      <ImageUpload username={user?.displayName} email={user?.email} />
+      {user && <ImageUpload username={user?.displayName} email={user?.email} />}
       <Posts user={user} />
     </div>
   );

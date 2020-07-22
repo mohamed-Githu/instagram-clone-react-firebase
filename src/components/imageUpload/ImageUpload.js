@@ -13,12 +13,16 @@ const ImageUpload = ({ username, email }) => {
   const handleImage = e => {
     if (e.target.files[0]) {
       setImage(e.target.files[0])
+      console.log(e.target.files[0].type)
     }
   }
 
   const handleUpload = () => {
-    const uploadTask = storage.ref(`images/${image.name}`).put(image);
+    const uploadTask = storage.ref(`videos/${image.name}`).put(image);
 
+    setCaption('')
+    setImage(null)
+    setProgress(0)
     uploadTask.on(
       'state_changed',
       (snapshot) => {
@@ -50,9 +54,6 @@ const ImageUpload = ({ username, email }) => {
         })
       }
     )
-    setCaption('')
-    setImage(null)
-    setProgress(0)
   }
 
   const handleCaption = e => setCaption(e.target.value)
@@ -62,7 +63,7 @@ const ImageUpload = ({ username, email }) => {
       <progress value={progress} max='100' className='imageupload__progress' />
       <div className="imageupload__input">
         <Input type='text' onChange={handleCaption} value={caption} placeholder='Caption' />
-        <input type='file' onChange={handleImage} />
+        <input type='file' onChange={handleImage} accept="image/*" />
       </div>
       <Button onClick={handleUpload} disabled={!image ? true : false}>
         Upload
