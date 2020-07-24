@@ -43,7 +43,10 @@ const App = () => {
           ) }
         </div>
       </Header>
-      {user && <ImageUpload username={user?.displayName} email={user?.email} />}
+      {user? 
+        <ImageUpload username={user?.displayName} email={user?.email} />
+        : <h2 style={{textAlign: 'center', margin: 10}}>Please Log In To Upload</h2>
+      }
       <Posts user={user} />
     </div>
   );

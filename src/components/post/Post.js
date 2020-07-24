@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react'
-import { db } from '../../firebase'
+import { db, storage } from '../../firebase'
 import firebase from 'firebase'
 import './post.scss' 
 import FlipMove from 'react-flip-move';
@@ -7,7 +7,7 @@ import FlipMove from 'react-flip-move';
 import Avatar from '@material-ui/core/Avatar'
 import DeleteIcon from '@material-ui/icons/Delete';
 
-const Post = ({ username, imgUrl, caption, email, id, user }) => {
+const Post = ({ username, imgUrl, imgName, caption, email, id, user }) => {
   const [comments, setComments] = useState([])
   const [commentInput, setCommetInput] = useState('')
 
@@ -43,14 +43,14 @@ const Post = ({ username, imgUrl, caption, email, id, user }) => {
     }
   }
 
-
   let trash =  email === user?.email ? true : false;
 
   const deletePost = () => {
     db.collection('posts').doc(id).delete();
+    storage.ref().child('files/' + imgName).delete()
+    .then().catch(error => console.log(error))
   }
   
-  console.log(imgUrl)
   return (
     <div className='post'>
 
@@ -61,8 +61,9 @@ const Post = ({ username, imgUrl, caption, email, id, user }) => {
         </div>
         { trash ? <DeleteIcon className='post__delete' onClick={deletePost} /> : '' }
       </div>
-
-      <img src={imgUrl} alt="PostImage" className='post__image'/>
+      {
+        imgUrl && <img src={imgUrl} alt="PostImage" className='post__image'/>
+      }
 
       <h4 className='post__caption'><strong>{username}: </strong>{caption}</h4>
       { comments.length === 0 ? false : true &&

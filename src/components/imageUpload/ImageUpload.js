@@ -1,24 +1,32 @@
 import React, { useState } from 'react'
 import { db, storage } from '../../firebase'
 import { Button, Input } from '@material-ui/core'
+import ImageIcon from '@material-ui/icons/Image';
+import VideoLibraryIcon from '@material-ui/icons/VideoLibrary';
 import firebase from 'firebase'
 
 import './imageUpload.scss'
 
 const ImageUpload = ({ username, email }) => {
   const [caption, setCaption] = useState('')
-  const [image, setImage] = useState(null)
+  const [file, setFile] = useState(null)
   const [progress, setProgress] = useState(0)
 
-  const handleImage = e => {
+  let fileName = 'No file chosen';
+
+  if (file) {
+    fileName = file.name
+  }
+
+  const handleFile = e => {
     if (e.target.files[0]) {
-      setImage(e.target.files[0])
-      console.log(e.target.files[0].type)
+      setFile(e.target.files[0])
+      console.log(e.target.files)
     }
   }
 
   const handleUpload = () => {
-    const uploadTask = storage.ref(`images/${image.name}`).put(image);
+    const uploadTask = storage.ref(`files/${file.name}`).put(file);
 
     uploadTask.on(
       'state_changed',
@@ -37,8 +45,8 @@ const ImageUpload = ({ username, email }) => {
       () => {
         // complete function
         storage
-        .ref('images')
-        .child(image.name)
+        .ref('files')
+        .child(file.name)
         .getDownloadURL()
         .then(url => {
           db.collection('posts').add({
@@ -46,14 +54,16 @@ const ImageUpload = ({ username, email }) => {
             caption: caption.trim(),
             imgUrl: url,
             username: username,
-            email: email
+            email: email,
+            imgName: file.name,
+            type: file.type
           })
         })
       }
     )
 
     setCaption('')
-    setImage(null)
+    setFile(null)
     setProgress(0)
   }
 
@@ -63,10 +73,32 @@ const ImageUpload = ({ username, email }) => {
     <div className='imageupload'>
       <progress value={progress} max='100' className='imageupload__progress' />
       <div className="imageupload__input">
-        <Input type='text' onChange={handleCaption} value={caption} placeholder='Caption' />
-        <input type='file' onChange={handleImage} accept="image/*" />
+        <Input
+          type='email'
+          color='primary'
+          onChange={handleCaption}
+          value={caption}
+          placeholder='Caption'
+        />
+        <div className="imageupload__buttonsContainer">
+          <input type='file' 
+            id='img'
+            onChange={handleFile}
+            accept="image/*"
+            className="inputfile"
+          />
+          <label htmlFor="img"><ImageIcon style={{marginRight: 5}} /> Image</label>
+          <p>{fileName}</p>
+          <input type='file'
+            id='video'
+            onChange={handleFile}
+            accept="video/*"
+            className="inputfile"
+          />
+          <label htmlFor="video"><VideoLibraryIcon style={{marginRight: 5}} /> Video</label>
+        </div>
       </div>
-      <Button onClick={handleUpload} disabled={!image ? true : false}>
+      <Button onClick={handleUpload} disabled={!file && !caption ? true : false}>
         Upload
       </Button>
     </div>

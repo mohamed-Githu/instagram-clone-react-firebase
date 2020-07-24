@@ -23,7 +23,7 @@ function Posts({ user }) {
   return (
     <div className='posts'>
       {
-        posts.map(({ imgUrl, caption, id, username, email }) => <Post 
+        posts.map(({ imgUrl, caption, id, username, email, imgName }) => <Post 
           key={id} 
           imgUrl={imgUrl} 
           username={username} 
@@ -33,6 +33,7 @@ function Posts({ user }) {
           user={user}
           myEmail={user?.email}
           commenterName={user?.displayName}
+          imgName={imgName}
         />)
       }
     </div>
