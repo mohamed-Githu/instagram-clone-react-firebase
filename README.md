@@ -1,3 +1,15 @@
+Cloning instagram useing react js and firebase to handle authentication, image upload and data storing.
+
+Functionality:
+- Adding posts
+- Editing and removing posts (only auther are allowed)
+- Writing comments
+
+Other technologies:
+- Material UI
+
+LIVE DEMO: https://instagram-clone-react-app.netlify.app/
+
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
 
 ## Available Scripts
